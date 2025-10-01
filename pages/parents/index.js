@@ -5,8 +5,8 @@ import api from "../../lib/api";
 
 export default function ParentsPage(){
   const [children, setChildren] = useState([]);
-  useEffect(()=>{ fetch(); }, []);
-  async function fetch(){ try { const r = await api.get('/api/parents_children.php'); setChildren(r.data || []); } catch(e){ setChildren([]); } }
+  useEffect(()=>{ fetchData(); }, []);
+  async function fetchData(){ try { const r = await api.get('/api/parents_children.php'); setChildren(r.data || []); } catch(e){ setChildren([]); } }
 
   return (
     <Box>
