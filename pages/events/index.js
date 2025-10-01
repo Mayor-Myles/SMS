@@ -7,8 +7,8 @@ import ModalForm from "../../components/ModalForm";
 export default function EventsPage(){
   const [events, setEvents] = useState([]);
   const [open, setOpen] = useState(false);
-  useEffect(()=>{ fetch(); }, []);
-  async function fetch(){ try { const r = await api.get('/api/events.php'); setEvents(r.data || []); } catch(e){ setEvents([]); } }
+  useEffect(()=>{ fetchData(); }, []);
+  async function fetchData(){ try { const r = await api.get('/api/events.php'); setEvents(r.data || []); } catch(e){ setEvents([]); } }
   async function add(payload){ await api.post('/api/events.php', payload); setOpen(false); fetch(); }
 
   return (
