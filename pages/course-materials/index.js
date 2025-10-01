@@ -6,8 +6,8 @@ import FileUploader from "../../components/FileUploader";
 
 export default function MaterialsPage(){
   const [materials, setMaterials] = useState([]);
-  useEffect(()=>{ fetch(); }, []);
-  async function fetch(){ try { const r = await api.get('/api/materials.php'); setMaterials(r.data || []); } catch(e){ setMaterials([]); } }
+  useEffect(()=>{ fetchData(); }, []);
+  async function fetchData(){ try { const r = await api.get('/api/materials.php'); setMaterials(r.data || []); } catch(e){ setMaterials([]); } }
   return (
     <Box>
       <Heading mb={4}>Course Materials</Heading>
