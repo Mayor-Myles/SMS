@@ -1,21 +1,31 @@
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+  ModalFooter,
+  Button,
+} from "@chakra-ui/react";
 
-import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, Button } from "@chakra-ui/react";
-import { useForm } from "react-hook-form";
-
-export default function ModalForm({ isOpen, onClose, title, children, onSubmit }){
-  const { register, handleSubmit } = useForm();
-  async function submit(data){
+export default function ModalForm({ isOpen, onClose, title, children, onSubmit }) {
+  async function handleSubmit(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const data = Object.fromEntries(formData.entries());
     await onSubmit(data);
   }
+
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>{title}</ModalHeader>
         <ModalCloseButton />
-        <form onSubmit={handleSubmit(submit)}>
+        <form onSubmit={handleSubmit}>
           <ModalBody>
-            {children({ register })}
+            {children}
           </ModalBody>
           <ModalFooter>
             <Button mr={3} onClick={onClose}>Cancel</Button>
@@ -24,5 +34,5 @@ export default function ModalForm({ isOpen, onClose, title, children, onSubmit }
         </form>
       </ModalContent>
     </Modal>
-  )
+  );
 }
